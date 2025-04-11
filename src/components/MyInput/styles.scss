@@ -1,0 +1,30 @@
+.my-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'Segoe UI', sans-serif;
+
+  div {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  input {
+    margin-bottom: 5px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      border-color: #6c63ff;
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.create-user-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  header {
+    margin: 20px;
+    font-size: 32px;
+  }
+
+  main {
+    justify-items: center;
+  }
+
+  .input-container {
+    div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  footer {
+    margin: 20px;
+  }
+}
