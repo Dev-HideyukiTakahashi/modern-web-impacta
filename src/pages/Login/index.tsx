@@ -1,19 +1,24 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MyButton from '../../components/MyButton';
 import MyInput from '../../components/MyInput';
+import { login } from '../../services/auth.service';
 import './styles.scss';
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   function signIn() {
-    if (username === 'teste' && password === '123456') {
-      alert('Usuário logado com sucesso');
-    } else {
-      alert('Login/senha inválido(a)');
-    }
-  }
+    login(username, password).then(signed => {
+        if (signed) {
+            navigate('/home')
+        } else {
+            alert('Login/senha inválido(a)')
+        }
+    })
+}
 
   return (
     <div className="login-page">
