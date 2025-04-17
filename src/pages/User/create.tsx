@@ -1,9 +1,12 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MyButton from '../../components/MyButton';
 import MyInput from '../../components/MyInput';
+import { saveUser } from '../../services/user.service';
 import './styles.scss';
-import { useState } from 'react';
 
 export default function CreateUser() {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +32,15 @@ export default function CreateUser() {
       alert('Senha inválida!');
       return;
     }
-    console.log(`Usuário ${name} criado com sucesso!`);
+    saveUser(name, username, password).then(code => {
+      if (code === 201) {
+        navigate('/home');
+      } else if (code === 400) {
+        alert('Usuário já existe!');
+      } else {
+        navigate('/login');
+      }
+    });
   }
 
   return (

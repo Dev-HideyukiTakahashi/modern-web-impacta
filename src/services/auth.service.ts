@@ -1,6 +1,15 @@
-export async function login(username: string, password: string) {
-  const url = 'http://localhost:3030/auth/login';
+const url = 'http://localhost:3030/auth/login';
+const TOKEN_KEY = '@AUTH:TOKEN';
 
+export function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+export function logOff() {
+  localStorage.removeItem(TOKEN_KEY);
+}
+
+export async function login(username: string, password: string) {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -10,7 +19,10 @@ export async function login(username: string, password: string) {
     }),
   });
   const data = await response.json();
-  if (data && data.token) return true;
+  if (data && data.token) {
+    localStorage.setItem(TOKEN_KEY, data.token);
+    return true;
+  }
 
   return false;
 }
